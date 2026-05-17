@@ -1,0 +1,141 @@
+.answer-sheet-section {
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  /* Prevent horizontal overflow on small devices */
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.questions-list {
+  display: grid;
+  /* Use auto-fill with a smaller minmax for phones, allowing 1 column on tight screens, multiple on tablets */
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.question-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  flex-wrap: wrap; /* Allows wrapping on extremely narrow screens */
+  gap: 0.5rem;
+}
+
+.question-row:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.question-row.marked-correct {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.question-row.marked-wrong {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.question-number {
+  font-family: var(--font-display);
+  font-weight: 600;
+  width: 35px;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.options-group {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap; /* Prevent overflow on tight screens */
+}
+
+/* Modern iOS 44x44px Touch Targets */
+.option-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--surface-border);
+  background: var(--surface-hover);
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  /* Prevent touch zoom on mobile Safari */
+  touch-action: manipulation;
+}
+
+.option-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.option-btn.selected {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+  box-shadow: 0 0 10px var(--primary-glow);
+}
+
+.mark-group {
+  display: flex;
+  gap: 6px;
+  margin-left: auto; /* Push to the right even if wrapping */
+}
+
+/* Modern iOS 44x44px Touch Targets */
+.mark-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--surface-border);
+  background: var(--surface-hover);
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  /* Prevent touch zoom on mobile Safari */
+  touch-action: manipulation;
+}
+
+.mark-btn.correct-btn:hover, .mark-btn.correct-btn.active {
+  background: var(--success);
+  border-color: var(--success);
+  color: white;
+  box-shadow: 0 0 10px var(--success-glow);
+}
+
+.mark-btn.wrong-btn:hover, .mark-btn.wrong-btn.active {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: white;
+  box-shadow: 0 0 10px var(--danger-glow);
+}
+
+/* Mobile optimizations */
+@media (max-width: 430px) { /* iPhone Max width */
+  .answer-sheet-section {
+    padding: 1rem;
+  }
+  
+  .questions-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .option-btn, .mark-btn {
+    /* Slightly scale down on extremely narrow phones, but rely on padding/touch-action to retain hit area */
+    width: 40px;
+    height: 40px;
+  }
+}
